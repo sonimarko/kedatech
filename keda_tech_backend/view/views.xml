@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+    <!-- Views -->
+
+    <!-- Service Team -->
+    <record id="kt_material_order_view_form" model="ir.ui.view">
+        <field name="name">kt_material_order_view_form</field>
+        <field name="model">kt.material.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="kt_name"/>
+                            <field name="kt_code"/>
+                            <field name="kt_type"/>
+                        </group>
+                        <group>
+                            <field name="kt_currency_id"/>
+                            <field name="kt_buy_price" options="{'currency_field': 'kt_currency_id'}"/>
+                            <field name="kt_supplier_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="kt_material_order_view_list" model="ir.ui.view">
+        <field name="name">kt_material_order_view_list</field>
+        <field name="model">kt.material.order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="kt_name"/>
+                <field name="kt_code"/>
+                <field name="kt_type"/>
+                <field name="kt_currency_id" invisible="1"/>
+                <field name="kt_buy_price" options="{'currency_field': 'kt_currency_id'}"/>
+                <field name="kt_supplier_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+        <record id="kt_material_order_search_view" model="ir.ui.view">
+            <field name="name">kt_material_order_search_view</field>
+            <field name="model">kt.material.order</field>
+            <field name="arch" type="xml">
+                <search string="Search Materials">
+                    <field name="kt_type" string="Product" filter_domain="[('kt_type', 'ilike', self)]"/>
+                    <separator/>
+                        <filter string="Fabric" name="fabric_type" domain="[('kt_type', '=', 'fabric')]"/>
+                        <filter string="Jeans" name="jeans_type" domain="[('kt_type', '=', 'jeans')]"/>
+                        <filter string="Cotton" name="cotton_type" domain="[('kt_type', '=', 'cotton')]"/>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+
+    <record id="kt_material_order_action" model="ir.actions.act_window">
+        <field name="name">Material Order</field>
+        <field name="res_model">kt.material.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem 
+        action="kt_material_order_action" 
+        id="kt_material_order_menu" 
+        name="Material Order" 
+        sequence="10"/>
+
+</data></odoo>
